@@ -358,3 +358,31 @@ spiffs_create_partition_assets(
     IMPORT_INC_PATH ${CMAKE_CURRENT_SOURCE_DIR}/boards/${BOARD_TYPE}
 )
 endif()
+
+if(CONFIG_BOARD_TYPE_HEYSANTA)
+set(URL "https://github.com/espressif2022/image_player/raw/main/test_apps/test_8bit")
+set(SPIFFS_DIR "${CMAKE_BINARY_DIR}/emoji")
+file(MAKE_DIRECTORY ${SPIFFS_DIR})
+set(FILES_TO_DOWNLOAD "")
+list(APPEND FILES_TO_DOWNLOAD "heart.aaf" "bell.aaf" "star.aaf" "Blinking.aaf" "snowman.aaf"
+    "cookie.aaf" "Whole_elf.aaf" "sleep.aaf" "deer.aaf")
+file(COPY "${CMAKE_SOURCE_DIR}/emoji/heart.aaf" DESTINATION "${SPIFFS_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/emoji/bell.aaf" DESTINATION "${SPIFFS_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/emoji/star.aaf" DESTINATION "${SPIFFS_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/emoji/Blinking.aaf" DESTINATION "${SPIFFS_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/emoji/snowman.aaf" DESTINATION "${SPIFFS_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/emoji/cookie.aaf" DESTINATION "${SPIFFS_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/emoji/Whole_elf.aaf" DESTINATION "${SPIFFS_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/emoji/sleep.aaf" DESTINATION "${SPIFFS_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/emoji/deer.aaf" DESTINATION "${SPIFFS_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/emoji/cross.aaf" DESTINATION "${SPIFFS_DIR}")
+file(COPY "${CMAKE_SOURCE_DIR}/emoji/happy.aaf" DESTINATION "${SPIFFS_DIR}")
+
+
+spiffs_create_partition_assets(
+    assets_A
+    ${SPIFFS_DIR}
+    FLASH_IN_PROJECT
+    MMAP_FILE_SUPPORT_FORMAT ".aaf"
+)
+endif()
